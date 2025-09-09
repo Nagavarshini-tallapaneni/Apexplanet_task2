@@ -1,4 +1,4 @@
-🌐 Intermediate HTML, CSS, and JavaScript Project
+🌐 Intermediate HTML, CSS, and JavaScript Project:
 
 This project demonstrates intermediate-level front-end development using HTML, CSS, and JavaScript.
 It focuses on forms, responsive layouts, and DOM manipulation to create interactive web pages.
