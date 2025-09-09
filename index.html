@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Project</title>
+  <style>
+    body { 
+        font-family: Arial; 
+        margin: 0; 
+        padding: 0;
+     }
+    header { 
+        background: #333; 
+        color: #fff; 
+        padding: 10px; 
+        text-align: center; 
+    }
+    nav { 
+        display: flex; 
+        justify-content: center; 
+        gap: 15px; 
+        background: #555; 
+    }
+    nav a { 
+        color: white; 
+        text-decoration: none; 
+    }
+    .container { 
+        display: grid; 
+        grid-template-columns: 1fr 1fr; 
+        gap: 20px; 
+        padding: 20px; 
+    }
+    .box { 
+        background: #f4f4f4; 
+        padding: 15px; 
+        border-radius: 8px; 
+    }
+    input, textarea, button { 
+        margin: 5px 0; 
+        padding: 8px; 
+        width: 100%; 
+    }
+    ul { 
+        list-style: none; 
+        padding: 0; 
+    }
+    li { 
+        background: #ddd; 
+        margin: 5px 0; 
+        padding: 5px; 
+        display: flex; 
+        justify-content: space-between; 
+    }
+    .done { 
+        text-decoration: line-through; 
+        color: gray; 
+    }
+    @media(max-width: 768px){ .container { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>My Mini Project</h1>
+  </header>
+  <nav>
+    <a href="#form">Form</a>
+    <a href="#todo">To-Do</a>
+  </nav>
+
+  <div class="container">
+    <!-- Contact Form -->
+    <div class="box" id="form">
+      <h2>Contact Form</h2>
+      <form id="contactForm">
+        <input type="text" id="name" placeholder="Name">
+        <input type="email" id="email" placeholder="Email">
+        <textarea id="message" placeholder="Message"></textarea>
+        <button type="submit">Send</button>
+        <p id="msg"></p>
+      </form>
+    </div>
+
+    <!-- To-Do List -->
+    <div class="box" id="todo">
+      <h2>To-Do List</h2>
+      <input type="text" id="task" placeholder="New Task">
+      <button onclick="addTask()">Add</button>
+      <ul id="list"></ul>
+    </div>
+  </div>
+
+  <script>
+    // Form Validation
+    document.getElementById("contactForm").addEventListener("submit", function(e){
+      e.preventDefault();
+      let name = document.getElementById("name").value.trim();
+      let email = document.getElementById("email").value.trim();
+      let message = document.getElementById("message").value.trim();
+      let msg = document.getElementById("msg");
+
+      if(!name || !email || !message){
+        msg.textContent = "All fields required!";
+        msg.style.color = "red";
+      } else if(!email.includes("@")){
+        msg.textContent = "Invalid email!";
+        msg.style.color = "red";
+      } else {
+        msg.textContent = "Form submitted!";
+        msg.style.color = "green";
+      }
+    });
+
+    // To-Do List
+    function addTask(){
+      let task = document.getElementById("task").value.trim();
+      if(task==="") return;
+      let li = document.createElement("li");
+      li.textContent = task;
+
+      li.onclick = () => li.classList.toggle("done"); // mark done
+
+      let del = document.createElement("button");
+      del.textContent = "X";
+      del.onclick = () => li.remove();
+
+      li.appendChild(del);
+      document.getElementById("list").appendChild(li);
+      document.getElementById("task").value = "";
+    }
+  </script>
+</body>
+</html>
